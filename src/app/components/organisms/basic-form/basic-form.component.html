@@ -1,0 +1,41 @@
+<form class="basic-form" [formGroup]="userForm">
+  <label>CPF:</label>
+  <input
+    type="text"
+    ps-mask="999.999.999-99"
+    formControlName="cpf"
+    name="CPF"
+    placeholder="Digite aqui"
+  />
+  <label>Sexo:</label>
+  <label class="inline">
+    <input type="radio" name="gender" [value]="'M'" formControlName="gender" />
+    Masculino
+  </label>
+  <label class="inline">
+    <input type="radio" name="gender" [value]="'F'" formControlName="gender" />
+    Feminino
+  </label>
+
+  <label>Nome:</label>
+  <input
+    type="text"
+    placeholder="Digite aqui"
+    maxlength="80"
+    [ngClass]="{
+      'ps-frm-error':
+        userForm.controls.name.status === 'INVALID' &&
+        userForm.controls.name.touched
+    }"
+    formControlName="name"
+    name="name"
+  />
+
+  <button
+    class="ps-btn"
+    [ngClass]="{ 'ps-btn-primary': userForm.status === 'VALID' }"
+    [disabled]="userForm.status === 'INVALID'"
+  >
+    {{ userForm.status }}
+  </button>
+</form>

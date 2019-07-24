@@ -1,0 +1,68 @@
+<form class="guide-form" [formGroup]="userForm">
+  <ps-form-field
+    [label-internal]="'CPF'"
+    [error-message]="'CPF Inválido.'"
+    [show-error-message]="
+      userForm.controls.cpf.status === 'INVALID' &&
+      userForm.controls.cpf.touched
+    "
+  >
+    <input
+      ps-field-entry-cpf
+      ps-mask="999.999.999-99"
+      formControlName="cpf"
+      name="CPF"
+      placeholder="Digite aqui"
+    />
+  </ps-form-field>
+
+  <ps-form-field [label]="'Sexo'" class="ps-alignRight">
+    <ps-form-field-item [label-radio]="'Masculino'">
+      <input
+        type="radio"
+        ps-form-radio
+        name="gender"
+        [value]="'M'"
+        formControlName="gender"
+      />
+    </ps-form-field-item>
+    <ps-form-field-item [label-radio]="'Feminino'">
+      <input
+        type="radio"
+        ps-form-radio
+        name="gender"
+        [value]="'F'"
+        formControlName="gender"
+      />
+    </ps-form-field-item>
+  </ps-form-field>
+
+  <ps-form-field
+    [label-internal]="'Nome'"
+    [error-message]="'Nome Inválido.'"
+    [show-error-message]="
+      userForm.controls.name.status === 'INVALID' &&
+      userForm.controls.name.touched
+    "
+  >
+    <input
+      placeholder="Digite aqui"
+      maxlength="80"
+      ps-field-entry
+      [ngClass]="{
+        'ps-frm-error':
+          userForm.controls.name.status === 'INVALID' &&
+          userForm.controls.name.touched
+      }"
+      formControlName="name"
+      name="name"
+    />
+  </ps-form-field>
+  <button
+    ps-btn
+    [ngClass]="{ 'ps-btn-primary': userForm.status === 'VALID' }"
+    [disabled]="userForm.status === 'INVALID'"
+  >
+    {{ userForm.status }}
+  </button>
+</form>
